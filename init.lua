@@ -615,7 +615,13 @@ require('lazy').setup({
       }
     end,
   },
-
+  --comment
+  {
+    'terrortylor/nvim-comment',
+    config = function()
+      require('nvim_comment').setup { create_mappings = false }
+    end,
+  },
   { -- Autoformat
     'stevearc/conform.nvim',
     lazy = false,
@@ -900,5 +906,7 @@ vim.keymap.set('n', '<leader>p', ':bp<cr>', { desc = '[P]revious tab' })
 vim.keymap.set('n', '<leader>x', ':bd<cr>', { desc = 'Close the tab' })
 vim.keymap.set('n', '<leader>cs', ':wq<cr>', { desc = '[C]lose [S]ave file' })
 vim.keymap.set('n', '<leader>cf', ':q!<cr>', { desc = '[C]lose no-save [F]ile' })
+-- comment
+vim.keymap.set('n', '<C-_>', ':CommentToggle<cr>', { desc = 'Comment toggle' })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
