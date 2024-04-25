@@ -598,6 +598,7 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'pyright', -- python
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -726,7 +727,8 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          -- Note: OVERRIDING this here to Tab
+          ['<Tab>'] = cmp.mapping.confirm { select = true },
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -903,10 +905,13 @@ require('bufferline').setup {}
 -- keymaps for tab switching
 vim.keymap.set('n', '<leader>n', ':bn<cr>', { desc = '[N]ext tab' })
 vim.keymap.set('n', '<leader>p', ':bp<cr>', { desc = '[P]revious tab' })
-vim.keymap.set('n', '<leader>x', ':bd<cr>', { desc = 'Close the tab' })
+vim.keymap.set('n', '<leader>x', ':bp<cr>:bd #<cr>', { desc = 'Close the tab' })
 vim.keymap.set('n', '<leader>cs', ':wq<cr>', { desc = '[C]lose [S]ave file' })
 vim.keymap.set('n', '<leader>cf', ':q!<cr>', { desc = '[C]lose no-save [F]ile' })
 -- comment
 vim.keymap.set('n', '<C-_>', ':CommentToggle<cr>', { desc = 'Comment toggle' })
+-- Accept a suggestion with a tab - done up
+-- Yank to clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
